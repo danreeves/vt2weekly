@@ -1,0 +1,16 @@
+{
+	"name": "VT2 Weekly",
+	"short_name": "VT2 Weekly",
+	"description": "Vermintide 2 Weekly",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#fff",
+	"theme_color": "#000",
+	"icons": [
+		{
+			"src": "/assets/icon.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	]
+}
