@@ -31,9 +31,9 @@ app.route("GET", "/", async function (_request, _response, context) {
 			});
 			return;
 		}
+		console.log(titleData);
 		cache.put("titleData", titleData);
 	}
-	console.log(JSON.parse(titleData.live_events));
 	let mutators = JSON.parse(titleData.live_events)[0].game_mode_data.mutators;
 
 	let output =
