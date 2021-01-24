@@ -3,7 +3,7 @@ const { readFileSync } = require("fs");
 const path = require("path");
 const merry = require("merry");
 const TimedCache = require("timed-cache");
-const fetchWeekly = require("./fetchWeekly.js");
+const getTitleData = require("./authentication.js");
 const localisations = require("./mutators.json");
 
 const robotsTxt = readFileSync("./robots.txt", { encoding: "UTF-8" });
@@ -20,10 +20,10 @@ app.route("GET", "/health-check", function (_, response) {
 });
 
 app.route("GET", "/", async function (_request, _response, context) {
-	let data = cache.get("weekly");
-	if (!data) {
-		data = await fetchWeekly();
-		if (data.error) {
+	let titleData = cache.get("titleData");
+	if (!titleData) {
+		titleData = await getTitleData();
+		if (titleData.error) {
 			context.log.error(`${data.status} - ${data.statusText}`);
 			context.send(500, {
 				error: true,
@@ -31,9 +31,10 @@ app.route("GET", "/", async function (_request, _response, context) {
 			});
 			return;
 		}
-		cache.put("weekly", data);
+		cache.put("titleData", titleData);
 	}
-	let mutators = data[0].game_mode_data.mutators;
+	console.log(JSON.parse(titleData.live_events));
+	let mutators = JSON.parse(titleData.live_events)[0].game_mode_data.mutators;
 
 	let output =
 		`It's ` +
