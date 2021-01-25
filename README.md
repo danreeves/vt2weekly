@@ -1,1 +1,1 @@
-# [Vermintide 2 Leaderboards](https://vt2leaderboards.onrender.com)
+# [Vermintide 2 Weekly](https://weekly.verminti.de)
