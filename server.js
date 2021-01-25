@@ -31,9 +31,14 @@ app.route("GET", "/", async function (_request, _response, context) {
 			});
 			return;
 		}
-		console.log(titleData);
+		console.log(JSON.stringify(titleData, null, 4));
 		cache.put("titleData", titleData);
 	}
+
+	if (!titleData.live_events) {
+		context.send(200, "There isn't one right now...");
+	}
+
 	let mutators = JSON.parse(titleData.live_events)[0].game_mode_data.mutators;
 
 	let output =
