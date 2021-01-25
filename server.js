@@ -37,6 +37,7 @@ app.route("GET", "/", async function (_request, _response, context) {
 
 	if (!titleData.live_events) {
 		context.send(200, "There isn't one right now...");
+		return;
 	}
 
 	let mutators = JSON.parse(titleData.live_events)[0].game_mode_data.mutators;
@@ -53,6 +54,7 @@ app.route("GET", "/", async function (_request, _response, context) {
 	}
 
 	context.send(200, output);
+	return;
 });
 
 app.route("GET", "/robots.txt", function (request, response, context) {
