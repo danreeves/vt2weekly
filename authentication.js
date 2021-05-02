@@ -42,15 +42,16 @@ module.exports = function () {
 						},
 					};
 
-					// eslint-disable-next-line new-cap
 					PlayFabClient.LoginWithSteam(request, (err, result) => {
 						if (err) {
 							console.log("[PlayFab] error logging in with steam", err);
 							cancelSteamTicketAndLogout();
 						} else {
 							console.log("[PlayFab] got sessionTicket");
-							resolve(result.data.InfoResultPayload.TitleData);
-							// resolve(result.data.SessionTicket);
+							resolve({
+								sessionTicket: result.data.SessionTicket,
+								...result.data.InfoResultPayload.TitleData,
+							});
 							cancelSteamTicketAndLogout();
 						}
 					});
